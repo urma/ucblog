@@ -1,0 +1,16 @@
+<div class="post">
+    <h2 class="title"><%= link_to @comment.title, [ @comment.post, @comment ] %></h2>
+    <p class="meta">
+        <span class="date"><%= time_ago_in_words(@comment.created_at) %>&nbsp;ago</span>
+        <span class="posted">Comentário por <a href="#"><%= @comment.author %></a></span>
+    </p>
+    <div style="clear: both;">&nbsp;</div>
+    <div class="entry">
+        <p><%= @comment.body %></p>
+    </div>
+	<div class="links">
+        <%= link_to @comment.post.title, post_url(@comment.post) %>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to 'Todos os posts', posts_url %>
+	</div>
+</div>
+

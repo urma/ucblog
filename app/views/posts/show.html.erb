@@ -1,0 +1,44 @@
+<% content_tag_for :div, @post do -%>
+    <h2 class="title"><%= link_to @post.title, @post %></h2>
+    <p class="meta">
+        <span class="date"><%= time_ago_in_words(@post.created_at) %>&nbsp;ago</span>
+        <span class="posted">Post por <a href="#"><%= @post.user.real_name %></a></span>
+    </p>
+    <div style="clear: both;">&nbsp;</div>
+    <div class="entry">
+        <p><%= @post.body %></p>
+    </div>
+	<div class="links">
+        <% if @post.user == session[:user] -%>
+          <%= link_to 'Remover', post_url(@post), { :confirm => 'Tem certeza?', :method => :delete } %>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= link_to 'Editar', edit_post_url(@post) %>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+        <% end -%>
+        <%= link_to 'Todos os posts', posts_url %>
+	</div>
+    <div id="comments" style="clear: both;">&nbsp;</div>
+	<% @post.comments.each do |comment| -%>
+	    <% content_tag_for :div, comment do -%>
+	        <p class="meta">
+	            <span class="date"><%= link_to comment.title, [ @post, comment ] %></span>
+	            <span class="posted">Escrito por <%= link_to comment.author, comment.url %></span>
+            </p>
+            <p><%= comment.body %></p>
+	    <% end -%>
+    <% end -%>
+    <div style="clear: both;">&nbsp;</div>
+    <p class="meta">
+        <span class="date">Novo Comentário</span>
+    </p>
+    <div style="clear: both;">&nbsp;</div>
+    <% form_for [ @post, @comment ] do |f| -%>
+        <table>
+            <tr><td><%= f.label :author, 'Autor:' %></td><td><%= f.text_field :author %></td></tr>
+            <tr><td><%= f.label :email, 'Email:' %></td><td><%= f.text_field :email %></td></tr>
+            <tr><td><%= f.label :url, 'URL:' %></td><td><%= f.text_field :url %></td></tr>
+            <tr><td><%= f.label :title, 'Título:' %></td><td><%= f.text_field :title %></td></tr>
+            <tr><td colspan="2"><%= f.text_area :body %></td></tr>
+            <tr><td>&nbsp;</td><td style="text-align: right;"><%= f.submit %></td></tr>
+        </table>
+    <% end -%>
+<% end -%>
+

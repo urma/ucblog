@@ -1,0 +1,7 @@
+<% form_for @post do |f| -%>
+  <%= f.label :title, 'T&iacute;tulo:' %><br/>
+  <%= f.text_field :title %><br/>
+  <%= f.label :body, 'Conte&uacute;do:' %><br/>
+  <%= f.text_area :body %><br/>
+  <%= f.submit 'Publicar' %>
+<% end -%>

@@ -1,0 +1,25 @@
+<% unless params[:s].nil? -%>
+    <h3 class="title">Listando resultados da busca por '<%= params[:s] %>'</h2>
+<% end -%>
+<% @posts.each do |post| -%>
+    <% content_tag_for :div, post do -%>
+        <h2 class="title"><%= link_to post.title, post %></h2>
+        <p class="meta">
+            <span class="date"><%= time_ago_in_words(post.created_at) %>&nbsp;ago</span>
+            <span class="posted">Post por <a href="#"><%= post.user.real_name %></a></span>
+        </p>
+        <div style="clear: both;">&nbsp;</div>
+        <div class="entry">
+	        <p><%= truncate(post.body, :length => 512, :omission => '...&nbsp;(more)') %></p>
+        </div>
+		<div class="links">
+		    <%= link_to 'Read More', post %>
+		    &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to(pluralize(post.comments.size, 'comment'), post_path(post, :anchor => 'comments')) %>
+            <% if post.user == session[:user] -%>
+              &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Remover', post_url(post), { :confirm => 'Tem certeza?', :method => :delete } %>
+              &nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Editar', edit_post_url(post) %>
+            <% end -%>
+		</div>
+    <% end -%>
+<% end -%>
+

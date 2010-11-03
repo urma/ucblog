@@ -1,0 +1,25 @@
+<div class="post">
+    <% unless flash[:login_error].nil? -%>
+        <h2 class="title"><%= flash[:login_error] %></h2>
+    <% end -%>
+    <p class="meta">
+        <span class="date">µCblog Login</span>
+    </p>
+    <div style="clear: both;">&nbsp;</div>
+    <% form_for :user, :url => { :action => :auth} do |f| -%>    
+        <table>
+            <tr>
+                <td><%= f.label :login, 'Usuário:' %></td>
+                <td><%= f.text_field :login %></td>
+            </tr>
+            <tr>
+                <td><%= f.label :login, 'Senha:' %></td>
+                <td><%= f.password_field :password %></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: right;"><%= f.submit 'Login' %></td>
+            </tr>
+        </table>
+    <% end -%>
+</div>
+
