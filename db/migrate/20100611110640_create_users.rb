@@ -12,6 +12,9 @@ class CreateUsers < ActiveRecord::Migration
       t.index :login, :unique => true
       t.index :email, :unique => true
     end
+
+    # Create initial administrator user
+    User.create(:login => 'admin', :real_name => 'Administrator', :email => 'admin@spam.la', :password => 'secret', :enabled => true)
   end
 
   def self.down
