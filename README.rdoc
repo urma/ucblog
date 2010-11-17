@@ -1,5 +1,4 @@
-µCBLOG
-  by Ulisses Montenegro
+= µCBLOG:
 
 == DESCRIPTION:
 
