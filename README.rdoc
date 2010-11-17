@@ -1,41 +1,44 @@
-ABOUT µCBLOG
+µCBLOG
+  by Ulisses Montenegro
+
+== DESCRIPTION:
 
 µCblog is a (intentionally) vulnerable blog application, written on Ruby
 on Rails, which I have successfully used in my classes on secure web
-application development. Because development was focused on doing things
-the WRONG way, even unrelated good programming practices are skipped,
-including usage of Rails excellent testing facilities.
+application development. The application is being continually extended,
 
-IMPORTANT: Even though I have spent some time trying to make the
-application look good enough, it is EXTREMELY vulnerable as is, and should
-never be used on a production environment.
+=== DISCLAIMER:
 
-REQUIREMENTS
+Even though I have spent some time trying to make the application look good
+enough, it is EXTREMELY vulnerable as is, and should never be used on a
+production environment.
+
+== REQUIREMENTS:
 
 Apart from Ruby 1.8.x, µCblog has very few requirements. It was developed
 using Rails 2.3.5, and uses SQLite3 for database storage. On any modern
 system supporting Ruby 1.8 and Rubygems, installing the requirements is as
 simple as running:
 
-$ gem install rails --version=2.3.5
-$ gem install sqlite3-ruby
+  $ gem install rails --version=2.3.5
+  $ gem install sqlite3-ruby
 
 Mongrel is also recommended when performing stressful security scans on the
 application, as Rails' default WEBrick can be a bottleneck. Also, Mongrel's
 output is a lot more verbose, which of course is a rather useful feature
 when trying to figure out how to exploit a given aspect of the application.
 
-$ gem install mongrel
+  $ gem install mongrel
 
-INSTALLATION
+== INSTALLATION:
 
 Simply obtain the code from Github, initialize the databases and run the
 server script:
 
-$ git clone git://github.com/urma/ucblog.git
-$ cd ucblog
-$ rake db:migrate
-$ ruby script/server
+  $ git clone git://github.com/urma/ucblog.git
+  $ cd ucblog
+  $ rake db:migrate
+  $ ruby script/server
 
 The application should then be available at http://localhost:3000/, and
 a default user (login: admin/password: secret) is available for login.
@@ -44,9 +47,9 @@ Currently there is no user admnistration interface, which means users must
 be created manually. The easiest way of doing so is by running the
 Rails console:
 
-$ ruby script/console
->> User.create(:login => 'some_login', :real_name => 'Some User', :email => 'some_email@domain.com', :password => 'some_password', :enabled => true)
-=> #<User id: 2, login: "some_login", real_name: "Some User", email: "some_email@domain.com", password: "some_password", enabled: true, created_at: "2010-11-03 21:54:07", updated_at: "2010-11-03 21:54:07">
+  $ ruby script/console
+  >> User.create(:login => 'some_login', :real_name => 'Some User', :email => 'some_email@domain.com', :password => 'some_password', :enabled => true)
+  => #<User id: 2, login: "some_login", real_name: "Some User", email: "some_email@domain.com", password: "some_password", enabled: true, created_at: "2010-11-03 21:54:07", updated_at: "2010-11-03 21:54:07">
 
 There will eventually be an administrative interface in the application, which
 will also add a completely new set of vulnerabilities to it.
